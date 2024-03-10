@@ -9,23 +9,26 @@
         <h1><a href="/ocave/index.php" class="logo">Ocave <span>Consulta ligações</span></a></h1>
         <ul class="list-unstyled components mb-5">
             <li>
-                <a href="/ocave/functions/monitoramentoClientesMais30.php"><span class="fa fa-circle mr-3"></span> Monitoramento de clientes (+30)</a>
+                <a href="/ocave/windows/monitoramentoClientesMais30.php"><span class="fa fa-circle mr-3"></span> Monitoramento de clientes (+30)</a>
             </li>
             <li>
-                <a href="/ocave/functions/monitoramentoEntregas.php"><span class="fa fa-circle mr-3"></span> Monitoramento de entregas</a>
+                <a href="/ocave/windows/monitoramentoEntregas.php"><span class="fa fa-circle mr-3"></span> Monitoramento de entregas</a>
             </li>
             <li>
-                <a href="/ocave/functions/monitoramentoClientes.php"><span class="fa fa-circle mr-3"></span>
+                <a href="/ocave/windows/monitoramentoClientes.php"><span class="fa fa-circle mr-3"></span>
                     Monitoramento de clientes</a>
             </li>
             <li>
-                <a href="/ocave/functions/cadastroClienteNovo.php"><span class="fa fa-circle mr-3"></span> Cadastro clientes novos</a>
+                <a href="/ocave/windows/cadastroClienteNovo.php"><span class="fa fa-circle mr-3"></span> Cadastro clientes novos</a>
             </li>
             <li>
                 <a href="#"><span class="fa fa-circle mr-3"></span> Aceitação clientes novos</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-circle mr-3"></span>Lista de clientes novos</a>
+                <a href="/ocave/windows/listaClientesNovos.php"><span class="fa fa-circle mr-3"></span>Lista de clientes novos</a>
+            </li>
+            <li>
+                <a href="/ocave/windows/meusClientesNovos.php"><span class="fa fa-circle mr-3"></span>Meus clientes novos</a>
             </li>
             <li>
                 <a href="#"><span class="fa fa-circle mr-3"></span> Acompanhamento</a>
@@ -34,7 +37,7 @@
                 <a href="#"><span class="fa fa-circle mr-3"></span> Monitoramento de clientes (por Setor)</a>
             </li>
             <li>
-                <a href="/ocave/functions/representante.php"><span class="fa fa-circle mr-3"></span> Representante</a>
+                <a href="/ocave/windows/representante.php"><span class="fa fa-circle mr-3"></span> Representante</a>
             </li>
             <li>
                 <a href="#"><span class="fa fa-circle mr-3"></span>Configurações</a>
