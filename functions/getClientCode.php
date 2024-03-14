@@ -15,22 +15,3 @@
         </p>
     </div>
 </div>
-
-<script>
-  function getClientCode() {
-    const clientCode = document.getElementById('clientCode').value;
-    fetch('http://localhost/ocave/backend/getClientCode.php?codigo=${clientCode}')
-    .then(response => response.json())
-    .then(data => {
-      const { nome, cidade, telefone, dataUltimaCompra, valorCompradoTotal } = data;
-
-      document.getElementById('businessName').textContent = nome;
-      document.getElementById('cityName').textContent = cidade;
-      document.getElementById('phoneNumber').textContent = telefone;
-      document.getElementById('lastBought').textContent = dataUltimaCompra;
-      document.getElementById('totalBoughtValue').textContent = valorTotalComprado;
-    }).catch(error => {
-      console.error('Ocorreu um erro: ', error);
-    });
-  }
-</script>
