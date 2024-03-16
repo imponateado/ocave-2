@@ -15,7 +15,12 @@
 <script>
   function getClientCode() {
     const clientCode = document.getElementById('clientCode').value;
-    fetch(`http://localhost/ocave/backend/getClientCode.php?codigo=${clientCode}`)
+    let baseUrl = window.location.protocol + '//' + window.location.hostname;
+    if (window.location.port) {
+      baseUrl += ':' + window.location.port;
+    }
+    let url = `${baseUrl}/ocave/backend/getClientCode.php?codigo=${clientCode}`
+    fetch(url)
     .then(response => response.json())
     .then(data => {
       const { nome, cidade, telefone, dataUltimaCompra, valorCompradoTotal } = data;

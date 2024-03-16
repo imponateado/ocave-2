@@ -14,7 +14,7 @@
 
     require '../functions/makeSqlConnectionToOwn.php';
 
-    $sql = "INSERT INTO historicoEntregas (ordemCarregamento, nomeContato, telefoneContato, pedidoOK, questionarioEntregas, avaliacaoEmpresa, alerta, observacao, produtoGostariaEntregasse) VALUES ('$ordemCarregamento', '$nomeContato', '$telefoneContato', '$pedidoOK', '$questionarioEntregas', '$avaliacaoEmpresa', '$alerta', '$observacao', '$produtoGostariaEntregasse')";
+    $sql = "INSERT INTO historicoentregas (ordemCarregamento, nomeContato, telefoneContato, pedidoOK, questionarioEntregas, avaliacaoEmpresa, alerta, observacao, produtoGostariaEntregasse) VALUES ('$ordemCarregamento', '$nomeContato', '$telefoneContato', '$pedidoOK', '$questionarioEntregas', '$avaliacaoEmpresa', '$alerta', '$observacao', '$produtoGostariaEntregasse')";
 
     if($conn->query($sql) === TRUE) {
         echo "Registrado com sucesso.";
