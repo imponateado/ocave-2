@@ -16,9 +16,9 @@
           <span class="col-1">
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Número da liberação</span>
+                <span class="input-group-text" id="inputGroup-sizing-sm">ordem de carregamento (OC)</span>
               </div>
-              <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="numeroLiberacao">
+              <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="ordemCarregamento">
             </div>
           </span>
           <span class="col-1">
@@ -39,7 +39,7 @@
           </span>
           <span class="col-1">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="1" id="pedidoOK">
+            <input class="form-check-input" type="checkbox" id="pedidoOK">
             <label class="form-check-label" for="pedidoOK">
               Pedido OK
             </label>
@@ -50,7 +50,7 @@
 
           <span class="col-1">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="alerta">
+                <input class="form-check-input" type="checkbox" id="alerta">
                 <label class="form-check-label btn btn-danger" for="alerta">
                   Alerta
                 </label>
@@ -74,7 +74,6 @@
           </span>
           <span class="col-1">
             <button type="button" class="btn btn-success" onclick="insertData();">Gravar</button>
-            <span class="col-1" id="getStatus"></span>
           </span>
         </p>
       </div>
@@ -83,32 +82,50 @@
 
   <script>
     function insertData() {
-      const numeroLiberacao = document.getElementById('numeroLiberacao').value;
+      const ordemCarregamento = document.getElementById('ordemCarregamento').value;
       const nomeContato = document.getElementById('nomeContato').value;
       const telefoneContato = document.getElementById('telefoneContato').value;
-      const pedidoOK = document.getElementById('pedidoOK').value;
+      const pedidoOK = document.getElementById('pedidoOK').checked;
 
-      const questionario = document.getElementsByName('questionario').value;
+      // Coletar os valores das checkboxes marcadas
+      let questionarioEntregas = Array.from(document.querySelectorAll('input[name="questionario"]:checked'))
+                                      .map(checkbox => checkbox.value)
+                                      .join(', '); // Separa os valores por vírgula
+
 
       const avaliacaoEmpresa = document.getElementById('avaliacaoEmpresa').value;
-      const alerta = document.getElementById('alerta').value;
+      const alerta = document.getElementById('alerta').checked;
       const observacao = document.getElementById('observacao').value;
       const produtoGostariaEntregasse = document.getElementById('produtoGostariaEntregasse').value;
 
-      if(numeroLiberacao === "" && nomeContato === "" && avaliacaoEmpresa === ""){
+      if(ordemCarregamento === "" && nomeContato === "" && avaliacaoEmpresa === ""){
         alert("Algum dos campos, número da liberação, ou nome do contato, ou avaliação da empresa está (estão) faltando.");
         return;
       }
 
-      let url = `${window.location.href}../backend/insertDataDB.php?numeroLiberacao=${numeroLiberacao}&nomeContato=${nomeContato}&telefoneContato=${telefoneContato}&pedidoOK=${pedidoOK}&questionario=${questionario}&avaliacaoEmpresa=${avaliacaoEmpresa}&alerta=${alerta}&observacao=${observacao}&produtoGostariaEntregasse=${produtoGostariaEntregasse}`;
+      let baseUrl = window.location.protocol + '//' + window.location.hostname;
+      if (window.location.port) {
+        baseUrl += ':' + window.location.port;
+      }
+      let url = `${baseUrl}/ocave/backend/insertDataDB.php?ordemCarregamento=${ordemCarregamento}&nomeContato=${nomeContato}&telefoneContato=${telefoneContato}&pedidoOK=${pedidoOK}&questionarioEntregas=${questionarioEntregas}&avaliacaoEmpresa=${avaliacaoEmpresa}&alerta=${alerta}&observacao=${observacao}&produtoGostariaEntregasse=${produtoGostariaEntregasse}`;
 
       fetch(url)
       .then(response => {
-        document.getElementById('getStatus').textContent = document.getElementById('insertStatus').value;
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text(); // ou response.json() se a resposta for JSON
       })
-      .catch(function() {
+      .then(data => {
+        // Agora 'data' é o conteúdo da resposta como texto ou JSON
+        window.alert(data); // Atualize conforme necessário
+        document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+        document.getElementById('clientCode').focus();
+        window.scrollTo(0, 0);
+      })
+      .catch(function(err) {
         console.log("Fetch error :-S", err);
-      })
+      });
     }
   </script>
 

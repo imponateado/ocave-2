@@ -1,5 +1,5 @@
 <?php
-    $numeroliberacao = $_GET['liberacao'];
+    $ordemCarregamento = $_GET['ordemCarregamento'];
     $nomeContato = $_GET['nomeContato'];
     $telefoneContato = $_GET['telefoneContato'];
     $pedidoOK = $_GET['pedidoOK'];
@@ -14,12 +14,12 @@
 
     require '../functions/makeSqlConnectionToOwn.php';
 
-    $sql = "INSERT INTO historicoEntregas (numeroLiberacao, nomeContato, telefoneContato, pedidoOK, questionarioEntregas, avaliacaoEmpresa, alerta, observacao, produtoGostariaEntregasse) VALUES ('$numeroliberacao', '$nomeContato', '$telefoneContato', '$pedidoOK', '$questionarioEntregas', '$avaliacaoEmpresa', '$alerta', '$observacao', '$produtoGostariaEntregasse')";
+    $sql = "INSERT INTO historicoEntregas (ordemCarregamento, nomeContato, telefoneContato, pedidoOK, questionarioEntregas, avaliacaoEmpresa, alerta, observacao, produtoGostariaEntregasse) VALUES ('$ordemCarregamento', '$nomeContato', '$telefoneContato', '$pedidoOK', '$questionarioEntregas', '$avaliacaoEmpresa', '$alerta', '$observacao', '$produtoGostariaEntregasse')";
 
     if($conn->query($sql) === TRUE) {
-        echo "<span id='insertStatus'>Registrado com sucesso</span>";
+        echo "Registrado com sucesso.";
     } else {
-        echo "<span id='insertStatus'>Erro ao inserir registro:" . $conn->error . "</span>";
+        echo "Erro ao inserir registro:" . $conn->error;
     }
     $conn->close();
 ?>
