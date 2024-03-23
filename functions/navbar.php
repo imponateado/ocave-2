@@ -18,6 +18,9 @@
                 <a href="/ocave/windows/listaMonitoramentoEntregas.php"><span class="fa fa-circle mr-3"></span> Listar o monitoramento de entregas</a>
             </li>
             <li>
+                <a href="/ocave/windows/estatisticaMonitoramentoEntregas.php"><span class="fa fa-circle mr-3"></span> Estatísticas  do monitoramento de entregas</a>
+            </li>
+            <li>
                 <a href="/ocave/windows/monitoramentoClientes.php"><span class="fa fa-circle mr-3"></span>
                     Monitoramento de clientes</a>
             </li>

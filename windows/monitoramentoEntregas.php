@@ -7,6 +7,7 @@
 		<?php require '../functions/navbar.php'; ?>
 		<!-- Page Content  -->
 		<div id="content" class="p-4 p-md-5 pt-5">
+    <class class="btn btn-danger">ATENÇÃO <br> Todas as ligações deverão ser efetuadas na semana posterior às entregas</class>
       <?php require '../functions/getClientCode.php' ?>
       <?php require '../functions/getClientData.php' ?>
     
@@ -39,9 +40,9 @@
           </span>
           <span class="col-1">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="pedidoOK">
-            <label class="form-check-label" for="pedidoOK">
-              Pedido OK
+            <input class="form-check-input" type="checkbox" id="semContato">
+            <label class="form-check-label" for="semContato">
+              Sem contato com o cliente
             </label>
           </div>
           </span>
@@ -85,12 +86,11 @@
       const ordemCarregamento = document.getElementById('ordemCarregamento').value;
       const nomeContato = document.getElementById('nomeContato').value;
       const telefoneContato = document.getElementById('telefoneContato').value;
-      const pedidoOK = document.getElementById('pedidoOK').checked;
+      const semContato = document.getElementById('semContato').checked;
 
-      // Coletar os valores das checkboxes marcadas
       let questionarioEntregas = Array.from(document.querySelectorAll('input[name="questionario"]:checked'))
                                       .map(checkbox => checkbox.value)
-                                      .join(', '); // Separa os valores por vírgula
+                                      .join(', ');
 
 
       const avaliacaoEmpresa = document.getElementById('avaliacaoEmpresa').value;
@@ -98,27 +98,26 @@
       const observacao = document.getElementById('observacao').value;
       const produtoGostariaEntregasse = document.getElementById('produtoGostariaEntregasse').value;
 
-      if(ordemCarregamento === "" && nomeContato === "" && avaliacaoEmpresa === ""){
-        alert("Algum dos campos, número da liberação, ou nome do contato, ou avaliação da empresa está (estão) faltando.");
-        return;
-      }
+      // if(ordemCarregamento === "" && nomeContato === "" && avaliacaoEmpresa === ""){
+      //   alert("Algum dos campos, número da liberação, ou nome do contato, ou avaliação da empresa está (estão) faltando.");
+      //   return;
+      // }
 
       let baseUrl = window.location.protocol + '//' + window.location.hostname;
       if (window.location.port) {
         baseUrl += ':' + window.location.port;
       }
-      let url = `${baseUrl}/ocave/backend/insertDataDB.php?ordemCarregamento=${ordemCarregamento}&nomeContato=${nomeContato}&telefoneContato=${telefoneContato}&pedidoOK=${pedidoOK}&questionarioEntregas=${questionarioEntregas}&avaliacaoEmpresa=${avaliacaoEmpresa}&alerta=${alerta}&observacao=${observacao}&produtoGostariaEntregasse=${produtoGostariaEntregasse}`;
+      let url = `${baseUrl}/ocave/backend/insertDataDB.php?ordemCarregamento=${ordemCarregamento}&nomeContato=${nomeContato}&telefoneContato=${telefoneContato}&semContato=${semContato}&questionarioEntregas=${questionarioEntregas}&avaliacaoEmpresa=${avaliacaoEmpresa}&alerta=${alerta}&observacao=${observacao}&produtoGostariaEntregasse=${produtoGostariaEntregasse}`;
 
       fetch(url)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        return response.text(); // ou response.json() se a resposta for JSON
+        return response.text();
       })
       .then(data => {
-        // Agora 'data' é o conteúdo da resposta como texto ou JSON
-        window.alert(data); // Atualize conforme necessário
+        window.alert(data);
         document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
         document.getElementById('clientCode').focus();
         window.scrollTo(0, 0);
