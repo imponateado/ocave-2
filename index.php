@@ -12,7 +12,7 @@ require 'functions/head.php';
 		<!-- Page Content  -->
 		<div id="content" class="p-4 p-md-5 pt-5">
 			<h2 class="mb-4">Dashboard</h2>
-			Ok
+			<div class="loader"></div>
 		</div>
 	</div>
 
@@ -22,3 +22,18 @@ require 'functions/head.php';
 </body>
 
 </html>
+
+<style>
+  .loader {
+  width: 120px;
+  height: 20px;
+  background: 
+    linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
+    #f2f2f2;
+  background-size:300% 100%;
+  animation: l1 1s infinite linear;
+}
+@keyframes l1 {
+  0% {background-position: right}
+}
+</style>

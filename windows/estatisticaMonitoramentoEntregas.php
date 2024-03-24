@@ -12,7 +12,7 @@ require '../functions/head.php';
 		<!-- Page Content  -->
 		<div id="content" class="p-4 p-md-5 pt-5">
 
-        <h3>Estatística geral</h3>
+        <h3>Estatística geral</h3><h6>"Dados do gráfico geral"</h6>
 
             <table class="table">
                 <thead class="thead-dark">

@@ -1,26 +1,44 @@
 <?php
     $startDate = $_GET['startDate'];
     $endDate = $_GET['endDate'];
+    $rota = $_GET['rota'];
 
-    // Convert endDate to include the entire day
     $endDate = date('Y-m-d', strtotime($endDate . ' +1 day'));
 
     require '../functions/makeSqlConnectionToOwn.php';
 
     $sql = "SELECT * FROM historicoentregas WHERE `data` >= '$startDate' AND `data` < '$endDate'";
     $result = $conn->query($sql);
+    $conn->close();
 
-    $data = array(); // Create an array to hold the data
+    $data = array();
 
     if($result) {
-        // Fetch all rows and add to the data array
         while($row = $result->fetch_assoc()) {
-            $data[] = $row;
+            $tempData = $row; // Cria um array temporário com os dados de $row
+
+            // Estabelece a conexão com o banco de dados WG
+            require '../functions/makeSqlConnectionToWG.php';
+            $ordemCarga = $row["ordemCarregamento"];
+            $sqlWG = "SELECT * FROM ordem_carga WHERE IDORDEMCARGA = '$ordemCarga'";
+            $resultWG = $conn->query($sqlWG);
+
+            if($rowWG = $resultWG->fetch_assoc()) {
+                $tempData["IDCLIENTE"] = $rowWG["IDCLIENTE"];
+                $idRotaWG = $rowWG["IDROTA"];
+
+                // Busca o CODINTERNO correspondente ao IDROTA na tabela rota
+                $sqlRota = "SELECT CODINTERNO FROM rota WHERE IDROTA = '$idRotaWG'";
+                $resultRota = $conn->query($sqlRota);
+                if($rowRota = $resultRota->fetch_assoc()) {
+                    $tempData["CODINTERNO"] = $rowRota["CODINTERNO"];
+                }
+                $conn->close();
+            }
+            $data[] = $tempData; // Adiciona o array temporário ao $data
         }
-        // Output the data as JSON
         echo json_encode($data);
     } else {
-        // Handle the error case
         echo json_encode(array('error' => 'No results found.'));
     }
 ?>
