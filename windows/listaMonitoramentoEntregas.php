@@ -101,7 +101,7 @@
           document.getElementById('filteredContent').innerHTML = tabela;
         })
 
-        var url = `${baseUrl}/ocave/backend/getRotalist.php`;
+        var url = `${baseUrl}/ocave/backend/getRotaList.php`;
         fetch(url)
         .then(response => {
           if (!response.ok) {
